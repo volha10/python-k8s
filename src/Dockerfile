@@ -1,6 +1,8 @@
 FROM python:3.12.4-slim
 LABEL authors="volha10"
 
+ENV PYTHONUNBUFFERED 1
+
 WORKDIR /code/
 COPY requirements.txt /code/
 
@@ -11,6 +13,8 @@ RUN /opt/venv/bin/pip install --upgrade pip && \
 
 COPY . /code/
 
-#RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh
+
+EXPOSE 8000
 
 CMD ["/code/entrypoint.sh"]

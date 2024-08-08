@@ -2,9 +2,9 @@ version: "3.9"
 
 services:
   db:
-    image: postgres:alpine
+    image: postgres:15
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - .postgres_data:/var/lib/postgresql/data
     env_file:
       - ./src/.env
     ports:
@@ -12,10 +12,10 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "psql -U postgres -d postgres"]
       interval: 5s
-      start_period: 60s
+      start_period: 100s
 
   web:
-    command: sh -c "sh /code/migrate.sh && sh /code/entrypoint.sh"
+    command: sh -c "sh migrate.sh && sh entrypoint.sh"
     build: ./src
     image: django-k8s:latest
     env_file:
@@ -27,4 +27,4 @@ services:
         condition: service_healthy
 
 volumes:
-  postgres_data:
+  .postgres_data:

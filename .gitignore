@@ -1,4 +1,6 @@
-postgres_data/
+.postgres_data/
+*media/
+*staticfiles/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
