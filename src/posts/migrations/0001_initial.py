@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ("content", models.TextField(max_length=1000)),
                 (
                     "image",
-                    models.ImageField(upload_to=posts.models._generate_path_to_image),
+                    models.ImageField(upload_to=posts.models._generate_image_name),
                 ),
             ],
         ),
