@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends 'posts/base.html' %}
+
+{% block head %}
     <title>Home page</title>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
     <h1>Home page</h1>
-    <div>
+    <div class="form-wrapper">
         <form enctype="multipart/form-data" method="post" action="{% url 'posts:index' %}">
             {% csrf_token %}
             {{ form }}
@@ -17,8 +17,7 @@
         <ul>
             {% for post in posts %}
                 <li><a href="{% url 'posts:detail' post.id %}">{{ post.title }}</a></li>
-            {% endfor%}
+            {% endfor %}
         </ul>
     </div>
-</body>
-</html>
+{% endblock %}

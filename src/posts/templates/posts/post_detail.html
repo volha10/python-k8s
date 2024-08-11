@@ -1,7 +1,14 @@
-<title>{{ post.title }}</title>
+{% extends 'posts/base.html' %}
 
-<p>{{ post.content }}</p>
-{% if post.image %}
-    <img src="{{ post.image.url }}"/>
-{% endif %}
-<p>{{ post.author }}</p>
+{% block head %}
+    <title>{{ post.title }}</title>
+{% endblock%}
+
+{% block body %}
+    <a href="{% url 'posts:index' %}">Back</a>
+    <p>{{ post.content }}</p>
+    {% if post.image %}
+        <img src="{{ post.image.url }}"/>
+    {% endif %}
+    <p>{{ post.author }}</p>
+{% endblock %}
