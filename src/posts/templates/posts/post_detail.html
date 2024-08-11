@@ -1,5 +1,7 @@
 <title>{{ post.title }}</title>
 
 <p>{{ post.content }}</p>
-<img src="{{ post.image.url }}"/>
+{% if post.image %}
+    <img src="{{ post.image.url }}"/>
+{% endif %}
 <p>{{ post.author }}</p>
