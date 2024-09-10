@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:15
     volumes:
-      - .dev_postgres_data:/var/lib/postgresql/data
+      - .prod_postgres_data:/var/lib/postgresql/data
     env_file:
       - ./src/.env
     ports:
@@ -26,9 +26,20 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - .dev_media:/code/media
+      - .prod_www-data:/www-data/web
+
+  nginx:
+    build:
+      context: ./nginx
+    #restart: always
+    depends_on:
+      - web
+    ports:
+      - "81:80"
+    volumes:
+      - .prod_www-data:/www-data/web
 
 volumes:
-  .dev_media:
-  .dev_postgres_data:
+  .prod_postgres_data:
+  .prod_www-data:
 

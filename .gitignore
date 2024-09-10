@@ -1,5 +1,6 @@
-.postgres_data/
-*media/
+*_postgres_data/
+*_www-data/
+*mediafiles/
 *staticfiles/
 
 # Byte-compiled / optimized / DLL files

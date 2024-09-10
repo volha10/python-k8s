@@ -26,11 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DJANGO_DEBUG")
+DEBUG = config("DJANGO_DEBUG", default=False, cast=bool)
 print(f"DEBUG={DEBUG}")
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:81"]
 
 # Application definition
 
@@ -85,7 +86,7 @@ DATABASES = {
         'USER': config('POSTGRES_USER'),
         'PASSWORD': config('POSTGRES_PASSWORD'),
         'HOST': config("POSTGRES_HOST"),
-        'PORT': config("POSTGRES_PORT"),
+        'PORT': config("POSTGRES_PORT", cast=int),
     }
 }
 
@@ -125,14 +126,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = '/www-data/web/staticfiles'
 
 if DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 MEDIA_URL = "media/"
+MEDIA_ROOT = '/www-data/web/mediafiles'
 
 if DEBUG:
-    MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
+    MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
