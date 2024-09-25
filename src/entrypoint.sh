@@ -1,5 +1,5 @@
 #!/bin/bash
 
-APP_PORT=${PORT:-8000}
+set -e
 
-/opt/venv/bin/gunicorn python_k8s.wsgi:application --bind "0.0.0.0:${APP_PORT}"
+/opt/venv/bin/gunicorn python_k8s.wsgi:application --bind "0.0.0.0:8002"

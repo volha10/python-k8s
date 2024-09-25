@@ -6,7 +6,7 @@ metadata:
     app: django
 spec:
   ports:
-    - port: 8000
+    - port: 80
   selector:
     app: django
     tier: app
@@ -74,7 +74,7 @@ spec:
             - name: POSTGRES_HOST
               value: django-postgres
             - name: DJANGO_DEBUG
-              value: "True"
+              value: "False"
             - name: POSTGRES_PORT
               value: "5432"
             - name: POSTGRES_NAME
@@ -87,3 +87,15 @@ spec:
                   name: db-password
                   key: password
 
+        - image: django-nginx:latest
+          imagePullPolicy: Never
+          name: nginx
+          ports:
+            - containerPort: 80
+              name: nginx
+          volumeMounts:
+            - name: django-app-data
+              mountPath: /www-data/web
+          env:
+            - name: APP_HOST
+              value: "127.0.0.1"

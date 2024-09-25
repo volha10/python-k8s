@@ -10,7 +10,6 @@ spec:
   selector:
     app: django
     tier: postgres
-  clusterIP: None
 
 ---
 

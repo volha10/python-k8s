@@ -15,6 +15,6 @@ COPY . /code/
 
 RUN chmod +x entrypoint.sh
 
-EXPOSE 8000
+#EXPOSE 8002
 
 CMD ["/code/entrypoint.sh"]
